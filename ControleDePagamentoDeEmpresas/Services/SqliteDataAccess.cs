@@ -124,63 +124,211 @@ namespace ControleDePagamentoDeEmpresas.Services
             }
         }
 
-        public static async void SaveEmpresa(EmpresaModel empresa)
+        public static List<EmpresaModel> LoadEmpresasW4(int index)
         {
-            await Task.Run(() =>
+            if (index == 0)
             {
                 using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
                 {
-                    cnn.Execute("insert into Empresas (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                    var output = cnn.Query<EmpresaModel>("select * from JaneiroW4", new DynamicParameters());
+                    return output.ToList();
                 }
-
-                if (empresa.Loja == Loja.Motomix)
+            }
+            else if (index == 1)
+            {
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
                 {
-                    if (empresa.Prioridade == Prioridade.Mensal)
+                    var output = cnn.Query<EmpresaModel>("select * from FevereiroW4", new DynamicParameters());
+                    return output.ToList();
+                }
+            }
+            else if (index == 2)
+            {
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<EmpresaModel>("select * from MarcoW4", new DynamicParameters());
+                    return output.ToList();
+                }
+            }
+            else if (index == 3)
+            {
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<EmpresaModel>("select * from AbrilW4", new DynamicParameters());
+                    return output.ToList();
+                }
+            }
+            else if (index == 4)
+            {
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<EmpresaModel>("select * from MaioW4", new DynamicParameters());
+                    return output.ToList();
+                }
+            }
+            else if (index == 5)
+            {
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<EmpresaModel>("select * from JunhoW4", new DynamicParameters());
+                    return output.ToList();
+                }
+            }
+            else if (index == 6)
+            {
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<EmpresaModel>("select * from JulhoW4", new DynamicParameters());
+                    return output.ToList();
+                }
+            }
+            else if (index == 7)
+            {
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<EmpresaModel>("select * from AgostoW4", new DynamicParameters());
+                    return output.ToList();
+                }
+            }
+            else if (index == 8)
+            {
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<EmpresaModel>("select * from SetembroW4", new DynamicParameters());
+                    return output.ToList();
+                }
+            }
+            else if (index == 9)
+            {
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<EmpresaModel>("select * from OutubroW4", new DynamicParameters());
+                    return output.ToList();
+                }
+            }
+            else if (index == 10)
+            {
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<EmpresaModel>("select * from NovembroW4", new DynamicParameters());
+                    return output.ToList();
+                }
+            }
+            else if (index == 11)
+            {
+                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<EmpresaModel>("select * from DezembroW4", new DynamicParameters());
+                    return output.ToList();
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static void SaveEmpresa(EmpresaModel empresa)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Empresas (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+            }
+
+            if (empresa.Loja == Loja.Motomix)
+            {
+                if (empresa.Prioridade == Prioridade.Mensal)
+                {
+                    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
                     {
-                        using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-                        {
-                            cnn.Execute("insert into JaneiroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into FevereiroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into MarcoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into AbrilMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into MaioMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into JunhoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into JulhoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into AgostoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into SetembroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into OutubroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into NovembroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into DezembroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                        }
-                    }
-                    else if (empresa.Prioridade == Prioridade.DoisMeses)
-                    {
-                        using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-                        {
-                            cnn.Execute("insert into JaneiroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into MarcoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into MaioMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into JulhoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into SetembroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into NovembroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                        }
-                    }
-                    else if (empresa.Prioridade == Prioridade.TresMeses)
-                    {
-                        using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-                        {
-                            cnn.Execute("insert into JaneiroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into AbrilMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into JulhoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                            cnn.Execute("insert into OutubroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
-                        }
-                    }
-                    else
-                    {
-                        return;
+                        cnn.Execute("insert into JaneiroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into FevereiroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into MarcoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into AbrilMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into MaioMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into JunhoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into JulhoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into AgostoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into SetembroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into OutubroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into NovembroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into DezembroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
                     }
                 }
-            });
+                else if (empresa.Prioridade == Prioridade.DoisMeses)
+                {
+                    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                    {
+                        cnn.Execute("insert into JaneiroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into MarcoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into MaioMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into JulhoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into SetembroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into NovembroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                    }
+                }
+                else if (empresa.Prioridade == Prioridade.TresMeses)
+                {
+                    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                    {
+                        cnn.Execute("insert into JaneiroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into AbrilMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into JulhoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into OutubroMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else if (empresa.Loja == Loja.W4)
+            {
+                if (empresa.Prioridade == Prioridade.Mensal)
+                {
+                    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                    {
+                        cnn.Execute("insert into JaneiroW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into FevereiroW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into MarcoW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into AbrilW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into MaioW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into JunhoW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into JulhoW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into AgostoW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into SetembroW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into OutubroW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into NovembroW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into DezembroW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                    }
+                }
+                else if (empresa.Prioridade == Prioridade.DoisMeses)
+                {
+                    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                    {
+                        cnn.Execute("insert into JaneiroW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into MarcoW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into MaioW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into JulhoMotomix (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into SetembroW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into NovembroW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                    }
+                }
+                else if (empresa.Prioridade == Prioridade.TresMeses)
+                {
+                    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+                    {
+                        cnn.Execute("insert into JaneiroW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into AbrilW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into JulhoW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                        cnn.Execute("insert into OutubroW4 (Nome, DataCompra, ValorCompra, Imposto, Loja, Prioridade) values (@Nome, @DataCompra, @ValorCompra, @Imposto, @Loja, @Prioridade)", empresa);
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
 
         public static void SaveEmpresa(EmpresaModel empresa, int index)
@@ -279,7 +427,7 @@ namespace ControleDePagamentoDeEmpresas.Services
                         cnn.Execute("update DezembroMotomix set Nome = @Nome, DataCompra = @DataCompra, ValorCompra = @ValorCompra, Imposto = @Imposto where Nome = @Nome and Id = @Id", empresa);
                 }
             }
-            else if(empresa.Loja == Loja.W4)
+            else if (empresa.Loja == Loja.W4)
             {
                 using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
                 {
@@ -311,7 +459,7 @@ namespace ControleDePagamentoDeEmpresas.Services
             }
         }
 
-            public static async Task<bool> DeleteEmpresa(EmpresaModel empresa)
+        public static void DeleteEmpresa(EmpresaModel empresa)
         {
             if (empresa.Loja == Loja.Motomix)
             {
@@ -330,7 +478,6 @@ namespace ControleDePagamentoDeEmpresas.Services
                     cnn.Execute("delete from OutubroMotomix where Nome = @Nome", empresa);
                     cnn.Execute("delete from NovembroMotomix where Nome = @Nome", empresa);
                     cnn.Execute("delete from DezembroMotomix where Nome = @Nome", empresa);
-                    return true;
                 }
             }
             else if (empresa.Loja == Loja.W4)
@@ -350,13 +497,11 @@ namespace ControleDePagamentoDeEmpresas.Services
                     cnn.Execute("delete from OutubroW4 where Nome = @Nome", empresa);
                     cnn.Execute("delete from NovembroW4 where Nome = @Nome", empresa);
                     cnn.Execute("delete from DezembroW4 where Nome = @Nome", empresa);
-                    return true;
                 }
             }
-            return false;
         }
 
-        public static async Task<bool> DeleteEmpresa(EmpresaModel empresa, int index)
+        public static void DeleteEmpresa(EmpresaModel empresa, int index)
         {
             if (empresa.Loja == Loja.Motomix)
             {
@@ -386,15 +531,14 @@ namespace ControleDePagamentoDeEmpresas.Services
                         cnn.Execute("delete from NovembroMotomix where Nome = @Nome", empresa);
                     else if (index == 11)
                         cnn.Execute("delete from DezembroMotomix where Nome = @Nome", empresa);
-                    return true;
                 }
             }
             else if (empresa.Loja == Loja.W4)
             {
                 using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
                 {
-                    if(index == 0)
-                    cnn.Execute("delete from JaneiroW4 where Nome = @Nome", empresa);
+                    if (index == 0)
+                        cnn.Execute("delete from JaneiroW4 where Nome = @Nome", empresa);
                     else if (index == 1)
                         cnn.Execute("delete from FevereiroW4 where Nome = @Nome", empresa);
                     else if (index == 2)
@@ -417,10 +561,8 @@ namespace ControleDePagamentoDeEmpresas.Services
                         cnn.Execute("delete from NovembroW4 where Nome = @Nome", empresa);
                     else if (index == 11)
                         cnn.Execute("delete from DezembroW4 where Nome = @Nome", empresa);
-                    return true;
                 }
             }
-            return false;
         }
 
         private static string LoadConnectionString(string id = "Default")

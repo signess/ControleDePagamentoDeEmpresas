@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace ControleDePagamentoDeEmpresas.MVVM.ViewModel
 {
-    public class HomeViewModel : INotifyPropertyChanged
+    public class W4ViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -87,7 +87,7 @@ namespace ControleDePagamentoDeEmpresas.MVVM.ViewModel
         public ICommand NovCommand { get; private set; }
         public ICommand DezCommand { get; private set; }
 
-        public HomeViewModel()
+        public W4ViewModel()
         {
             EmpresaList = new ObservableCollection<EmpresaModel>();
             MesIndex = 0;
@@ -162,7 +162,7 @@ namespace ControleDePagamentoDeEmpresas.MVVM.ViewModel
 
             AddCommand = new RelayCommand(args =>
             {
-                AddEmpresaWindow addEmpresaWindow = new AddEmpresaWindow(MesIndex, Loja.Motomix);
+                AddEmpresaWindow addEmpresaWindow = new AddEmpresaWindow(MesIndex, Loja.W4);
                 addEmpresaWindow.Closed += (s, eventarg) =>
                 {
                     GetEmpresa();
@@ -185,7 +185,7 @@ namespace ControleDePagamentoDeEmpresas.MVVM.ViewModel
         public void GetEmpresa()
         {
             if (EmpresaList.Count > 0) EmpresaList.Clear();
-            EmpresaList = new ObservableCollection<EmpresaModel>(SqliteDataAccess.LoadEmpresasMotomix(MesIndex));
+            EmpresaList = new ObservableCollection<EmpresaModel>(SqliteDataAccess.LoadEmpresasW4(MesIndex));
             Somar();
         }
 

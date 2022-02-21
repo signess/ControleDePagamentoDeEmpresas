@@ -4,7 +4,6 @@ using ControleDePagamentoDeEmpresas.Services;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -101,25 +100,27 @@ namespace ControleDePagamentoDeEmpresas.MVVM.ViewModel
         public CadastroViewModel()
         {
             EmpresaList = new List<EmpresaModel>();
-            cmdAddEmpresa = new RelayCommand(o =>
+            cmdAddEmpresa = new RelayCommand(_ =>
             {
                 if (CanExecute)
                 {
                     AddEmpresa();
+                    Refresh();
                 }
             });
             cmdExcluirEmpresa = new RelayCommand(o =>
             {
                 DeleteEmpresa(o as EmpresaModel);
+                Refresh();
             });
-            cmdRefresh = new RelayCommand(o =>
+            cmdRefresh = new RelayCommand(_ =>
             {
                 GetEmpresa();
             });
-            GetEmpresa();
+            Refresh();
         }
 
-        private async void AddEmpresa()
+        private void AddEmpresa()
         {
             EmpresaModel novaEmpresa = new EmpresaModel
             {
@@ -130,14 +131,12 @@ namespace ControleDePagamentoDeEmpresas.MVVM.ViewModel
                 Loja = Loja,
                 Prioridade = Prioridade
             };
-            await Task.Run(() =>
-            {
-                SqliteDataAccess.SaveEmpresa(novaEmpresa);
-                GetEmpresa();
-            });
+
+            SqliteDataAccess.SaveEmpresa(novaEmpresa);
+            GetEmpresa();
         }
 
-        private async void DeleteEmpresa(EmpresaModel empresa)
+        private void DeleteEmpresa(EmpresaModel empresa)
         {
             if (MessageBox.Show("Deseja excluir esse Serviço?", "Excluir Serviço", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
@@ -145,17 +144,10 @@ namespace ControleDePagamentoDeEmpresas.MVVM.ViewModel
             }
             else
             {
-                var task = Task.Run(async () => await SqliteDataAccess.DeleteEmpresa(empresa));
+                SqliteDataAccess.DeleteEmpresa(empresa);
 
-                if (!task.Result)
-                {
-                    MessageBox.Show("Erro na conexão. Operação nâo concluida!");
-                }
-                else
-                {
-                    MessageBox.Show("Excluído com sucesso!");
-                    GetEmpresa();
-                }
+                MessageBox.Show("Excluído com sucesso!");
+                GetEmpresa();
             }
         }
 
@@ -163,6 +155,14 @@ namespace ControleDePagamentoDeEmpresas.MVVM.ViewModel
         {
             if (EmpresaList.Count > 0) EmpresaList.Clear();
             EmpresaList = SqliteDataAccess.LoadEmpresas();
+        }
+
+        public void Refresh()
+        {
+            Nome = string.Empty;
+            Loja = Loja.Motomix;
+            Prioridade = Prioridade.Mensal;
+            GetEmpresa();
         }
     }
 }

@@ -92,13 +92,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MVVM\Model\AnoModel.cs" />
-    <Compile Include="MVVM\Model\MesModel.cs" />
+    <Compile Include="MVVM\ViewModel\W4ViewModel.cs" />
     <Compile Include="MVVM\View\AddEmpresaWindow.xaml.cs">
       <DependentUpon>AddEmpresaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\EditarEmpresaWindow.xaml.cs">
       <DependentUpon>EditarEmpresaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\W4View.xaml.cs">
+      <DependentUpon>W4View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\SqliteDataAccess.cs" />
@@ -130,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\W4View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

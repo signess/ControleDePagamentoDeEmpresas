@@ -1,17 +1,11 @@
 ﻿using ControleDePagamentoDeEmpresas.Core;
-using System;
+using ControleDePagamentoDeEmpresas.MVVM.Model;
+using ControleDePagamentoDeEmpresas.Services;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ControleDePagamentoDeEmpresas.MVVM.View
 {
@@ -20,14 +14,34 @@ namespace ControleDePagamentoDeEmpresas.MVVM.View
     /// </summary>
     public partial class AddEmpresaWindow : Window
     {
-        public ICommand AddEmpresaCommand { get; private set; }
-        public AddEmpresaWindow()
+        private List<EmpresaModel> empresaList;
+        public List<EmpresaModel> EmpresaList
+        {
+            get => empresaList;
+            private set
+            {
+                empresaList = value;
+            }
+        }
+        private int _index;
+
+        public AddEmpresaWindow(int index, Loja loja)
         {
             InitializeComponent();
-            AddEmpresaCommand = new RelayCommand(o =>
-            {
-                
-            });
+            if (loja == Loja.Motomix)
+                EmpresaList = SqliteDataAccess.LoadEmpresas().Where(x => x.Loja == Loja.Motomix).ToList();
+            else if (loja == Loja.W4)
+                EmpresaList = SqliteDataAccess.LoadEmpresas().Where(x => x.Loja == Loja.W4).ToList();
+            Empresas.ItemsSource = EmpresaList;
+            _index = index;
+        }
+
+        private void AddEmpresa(object sender, MouseButtonEventArgs e)
+        {
+            if (Empresas.SelectedItem == null) return;
+            var selectedEmpresa = Empresas.SelectedItem as EmpresaModel;
+            SqliteDataAccess.SaveEmpresa(selectedEmpresa, _index);
+            this.Close();
         }
     }
 }

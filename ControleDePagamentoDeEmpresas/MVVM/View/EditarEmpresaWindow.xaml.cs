@@ -1,8 +1,6 @@
 ﻿using ControleDePagamentoDeEmpresas.MVVM.Model;
 using ControleDePagamentoDeEmpresas.Services;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ControleDePagamentoDeEmpresas.MVVM.View
@@ -25,9 +23,7 @@ namespace ControleDePagamentoDeEmpresas.MVVM.View
             ImpostoBox.Text = empresa.Imposto.ToString();
 
             _index = index;
-
         }
-
 
         private void ExcluirBtn(object sender, RoutedEventArgs e)
         {
@@ -37,28 +33,18 @@ namespace ControleDePagamentoDeEmpresas.MVVM.View
             }
             else
             {
-                
-                var task = Task.Run(async () => await SqliteDataAccess.DeleteEmpresa(_empresa, _index));
-                if (!task.Result)
-                {
-                    MessageBox.Show("Erro na conexão com o banco de dados. Operação nâo concluida!");
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("Excluído!");
-                    Close();
-                }
+                SqliteDataAccess.DeleteEmpresa(_empresa, _index);
+
+                MessageBox.Show("Excluído!");
+                Close();
             }
-            
         }
-        
+
         private void FinalizarBtn(object sender, RoutedEventArgs e)
         {
             EmpresaModel novaEmpresa = new EmpresaModel { Id = _empresa.Id, Nome = EmpresaBox.Text, DataCompra = DataCompraBox.Text, ValorCompra = Convert.ToDecimal(ValorCompraBox.Text), Imposto = Convert.ToDecimal(ImpostoBox.Text), Loja = _empresa.Loja, Prioridade = _empresa.Prioridade };
             SqliteDataAccess.UpdateEmpresa(novaEmpresa, _index);
             this.Close();
         }
-        
     }
 }

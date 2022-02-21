@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:ControleDePagamentoDeEmpresas.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700"
+        Title="Cadastro e Controle de Pagamentos" Height="700"
         MinWidth="428"
-        Width="1350" Background="Transparent" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Width="1350" Background="Transparent" ResizeMode="CanResizeWithGrip" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-    <Border Background="Black" CornerRadius="20">
+    <Border Background="Black" CornerRadius="0,0,20,20">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
@@ -26,14 +26,21 @@
                HorizontalAlignment="Left"
                Margin="20,0,0,0" />
             <StackPanel Grid.Row="1">
-                <RadioButton Content="Motomix"
+                <RadioButton Content="MOTOMIX"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtomTheme}" 
                              IsChecked="True"
                              Command="{Binding HomeViewCommand}"/>
-                <RadioButton Content="Cadastro"
+                <RadioButton Content="W4"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtomTheme}" 
+                             IsChecked="False"
+                             Command="{Binding W4ViewCommand}"/>
+                <RadioButton Content="CADASTRO"
                              Height="50"
                              Foreground="White"
                              FontSize="14"

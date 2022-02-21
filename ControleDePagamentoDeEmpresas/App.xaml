@@ -14,7 +14,9 @@
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                 <view:HomeView />
             </DataTemplate>
-
+            <DataTemplate DataType="{x:Type viewModel:W4ViewModel}">
+                <view:W4View />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:CadastroViewModel}">
                 <view:CadastroView />
             </DataTemplate>
