@@ -7,11 +7,11 @@ using System.Windows;
 // As informações gerais sobre um assembly são controladas por
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associada a um assembly.
-[assembly: AssemblyTitle("ControleDePagamentoDeEmpresas")]
+[assembly: AssemblyTitle("Controle de Pagamento de Empresas")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ControleDePagamentoDeEmpresas")]
+[assembly: AssemblyCompany("Aurelio Henrique")]
+[assembly: AssemblyProduct("Controle de Pagamento de Empresas")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

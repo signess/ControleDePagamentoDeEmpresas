@@ -21,10 +21,6 @@
                 <RowDefinition Height="75" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Image Source="Assets/motomixlogo.png/"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Left"
-               Margin="20,0,0,0" />
             <StackPanel Grid.Row="1">
                 <RadioButton Content="MOTOMIX"
                              Height="50"

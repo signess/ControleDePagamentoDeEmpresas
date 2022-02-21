@@ -15,17 +15,5 @@ namespace ControleDePagamentoDeEmpresas
     /// </summary>
     public partial class App : Application
     {
-        static DatabaseService database;
-        public static DatabaseService Database
-        {
-            get
-            {
-                if(database == null)
-                {
-                    database = new DatabaseService(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AppDB.db3"));
-                }
-                return database;
-            }
-        }
     }
 }

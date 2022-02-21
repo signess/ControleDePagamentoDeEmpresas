@@ -1,10 +1,4 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace ControleDePagamentoDeEmpresas.MVVM.Model
 {
@@ -28,7 +22,6 @@ namespace ControleDePagamentoDeEmpresas.MVVM.Model
     }
     public class EmpresaModel
     {
-        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Nome { get; set; }
         public string DataCompra { get; set; }
