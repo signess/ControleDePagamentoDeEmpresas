@@ -19,6 +19,8 @@ namespace ControleDePagamentoDeEmpresas.MVVM.Model
         Motomix,
         [Description("W4 - Dourados")]
         W4,
+        [Description("Ambas as lojas")]
+        Todas
     }
     public class EmpresaModel
     {
