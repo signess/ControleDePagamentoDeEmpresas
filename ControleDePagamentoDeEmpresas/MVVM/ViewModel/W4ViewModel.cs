@@ -172,7 +172,7 @@ namespace ControleDePagamentoDeEmpresas.MVVM.ViewModel
 
             EditarEmpresaCommand = new RelayCommand(args =>
             {
-                EditarEmpresaWindow editarEmpresaWindow = new EditarEmpresaWindow(args as EmpresaModel, MesIndex, 1);
+                EditarEmpresaWindow editarEmpresaWindow = new EditarEmpresaWindow(args as EmpresaModel, MesIndex, Loja.W4);
                 editarEmpresaWindow.Closed += (s, eventarg) =>
                 {
                     GetEmpresa();

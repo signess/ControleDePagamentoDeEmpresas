@@ -405,21 +405,21 @@ namespace ControleDePagamentoDeEmpresas.Services
             }
         }
 
-        public static void SaveEmpresa(EmpresaModel empresa, int index)
+        public static void SaveEmpresa(EmpresaModel empresa, int index, Loja loja)
         {
-            if (empresa.Loja == Loja.Motomix || empresa.Loja == Loja.Todas)
+            if (loja == Loja.Motomix)
             {
                 SaveEmpresaMotomix(empresa, index);
             }
-            else if (empresa.Loja == Loja.W4 || empresa.Loja == Loja.Todas)
+            else if (loja == Loja.W4)
             {
                 SaveEmpresaW4(empresa, index);
             }
         }
 
-        public static void UpdateEmpresa(EmpresaModel empresa, int index)
+        public static void UpdateEmpresa(EmpresaModel empresa, int index, Loja loja)
         {
-            if (empresa.Loja == Loja.Motomix || empresa.Loja == Loja.Todas)
+            if (loja == Loja.Motomix)
             {
                 using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
                 {
@@ -449,7 +449,7 @@ namespace ControleDePagamentoDeEmpresas.Services
                         cnn.Execute("update DezembroMotomix set Nome = @Nome, DataCompra = @DataCompra, ValorCompra = @ValorCompra, Imposto = @Imposto where Nome = @Nome and Id = @Id", empresa);
                 }
             }
-            else if (empresa.Loja == Loja.W4 || empresa.Loja == Loja.Todas)
+            else if (loja == Loja.W4)
             {
                 using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
                 {

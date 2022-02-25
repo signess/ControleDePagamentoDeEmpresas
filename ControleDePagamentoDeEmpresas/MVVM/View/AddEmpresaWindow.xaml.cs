@@ -14,6 +14,7 @@ namespace ControleDePagamentoDeEmpresas.MVVM.View
     /// </summary>
     public partial class AddEmpresaWindow : Window
     {
+        private Loja _loja;
         private List<EmpresaModel> empresaList;
         public List<EmpresaModel> EmpresaList
         {
@@ -28,10 +29,11 @@ namespace ControleDePagamentoDeEmpresas.MVVM.View
         public AddEmpresaWindow(int index, Loja loja)
         {
             InitializeComponent();
+            _loja = loja;
             if (loja == Loja.Motomix)
-                EmpresaList = SqliteDataAccess.LoadEmpresas().Where(x => x.Loja == Loja.Motomix).ToList();
+                EmpresaList = SqliteDataAccess.LoadEmpresas().Where(x => x.Loja == Loja.Motomix || x.Loja == Loja.Todas).ToList();
             else if (loja == Loja.W4)
-                EmpresaList = SqliteDataAccess.LoadEmpresas().Where(x => x.Loja == Loja.W4).ToList();
+                EmpresaList = SqliteDataAccess.LoadEmpresas().Where(x => x.Loja == Loja.W4 || x.Loja == Loja.Todas).ToList();
             Empresas.ItemsSource = EmpresaList;
             _index = index;
         }
@@ -40,7 +42,7 @@ namespace ControleDePagamentoDeEmpresas.MVVM.View
         {
             if (Empresas.SelectedItem == null) return;
             var selectedEmpresa = Empresas.SelectedItem as EmpresaModel;
-            SqliteDataAccess.SaveEmpresa(selectedEmpresa, _index);
+            SqliteDataAccess.SaveEmpresa(selectedEmpresa, _index, _loja);
             this.Close();
         }
     }

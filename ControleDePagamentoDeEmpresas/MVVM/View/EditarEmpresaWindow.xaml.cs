@@ -12,9 +12,9 @@ namespace ControleDePagamentoDeEmpresas.MVVM.View
     {
         private EmpresaModel _empresa;
         private int _index;
-        private int _loja;
+        private Loja _loja;
 
-        public EditarEmpresaWindow(EmpresaModel empresa, int index, int loja)
+        public EditarEmpresaWindow(EmpresaModel empresa, int index, Loja loja)
         {
             InitializeComponent();
             _empresa = empresa;
@@ -35,9 +35,9 @@ namespace ControleDePagamentoDeEmpresas.MVVM.View
             }
             else
             {
-                if (_loja == 0)
+                if (_loja == Loja.Motomix)
                     SqliteDataAccess.DeleteEmpresaMotomix(_empresa, _index);
-                else if (_loja == 1)
+                else if (_loja == Loja.W4)
                     SqliteDataAccess.DeleteEmpresaW4(_empresa, _index);
 
                 MessageBox.Show("Excluído!");
@@ -48,7 +48,7 @@ namespace ControleDePagamentoDeEmpresas.MVVM.View
         private void FinalizarBtn(object sender, RoutedEventArgs e)
         {
             EmpresaModel novaEmpresa = new EmpresaModel { Id = _empresa.Id, Nome = EmpresaBox.Text, DataCompra = DataCompraBox.Text, ValorCompra = Convert.ToDecimal(ValorCompraBox.Text), Imposto = Convert.ToDecimal(ImpostoBox.Text), Loja = _empresa.Loja, Prioridade = _empresa.Prioridade };
-            SqliteDataAccess.UpdateEmpresa(novaEmpresa, _index);
+            SqliteDataAccess.UpdateEmpresa(novaEmpresa, _index, _loja);
             this.Close();
         }
     }
