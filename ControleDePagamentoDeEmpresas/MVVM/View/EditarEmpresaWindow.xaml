@@ -1,14 +1,14 @@
-﻿<Window x:Class="ControleDePagamentoDeEmpresas.MVVM.View.EditarEmpresaWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ControleDePagamentoDeEmpresas.MVVM.View"
-        mc:Ignorable="d"
-        Title="Editar Empresa"
+﻿<Window
+    x:Class="ControleDePagamentoDeEmpresas.MVVM.View.EditarEmpresaWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Editar Empresa"
     Width="800"
     Height="250"
-    Background="#1B1B1B">
+    Background="#1B1B1B"
+    mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="160" />
@@ -22,7 +22,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <TextBlock
             Grid.Row="0"
             HorizontalAlignment="Right"
@@ -31,18 +31,17 @@
             Foreground="White"
             Text="Empresa:" />
         <TextBox
-                x:Name="EmpresaBox"
-                Grid.Column="1"
-                Width="140"
-                Height="40"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="#22202f"
-                FontSize="18"
-                Foreground="White"
-                Style="{StaticResource Estilo_Placeholder}"
-                Tag="Nome" />
-
+            x:Name="EmpresaBox"
+            Grid.Column="1"
+            Width="140"
+            Height="40"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="#22202f"
+            FontSize="18"
+            Foreground="White"
+            Style="{StaticResource Estilo_Placeholder}"
+            Tag="Nome" />
 
         <TextBlock
             Grid.Column="2"
@@ -52,39 +51,40 @@
             Foreground="White"
             Text="Data da Compra:" />
         <TextBox
-                x:Name="DataCompraBox"
-                Grid.Column="3"
-                Width="140"
-                Height="40"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="#22202f"
-                FontSize="18"
-                Foreground="White"
-                Style="{StaticResource Estilo_Placeholder}"
-                Tag="Data" />
+            x:Name="DataCompraBox"
+            Grid.Column="3"
+            Width="140"
+            Height="40"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="#22202f"
+            FontSize="18"
+            Foreground="White"
+            Style="{StaticResource Estilo_Placeholder}"
+            Tag="Data" />
 
         <TextBlock
-            Grid.Column="0"
             Grid.Row="1"
+            Grid.Column="0"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             FontSize="20"
             Foreground="White"
             Text="Valor da Compra:" />
         <TextBox
-                x:Name="ValorCompraBox"
+            x:Name="ValorCompraBox"
             Grid.Row="1"
-                Grid.Column="1"
-                Width="140"
-                Height="40"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="#22202f"
-                FontSize="18"
-                Foreground="White"
-                Style="{StaticResource Estilo_Placeholder}"
-                Tag="R$" />
+            Grid.Column="1"
+            Width="140"
+            Height="40"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="#22202f"
+            FontSize="18"
+            Foreground="White"
+            PreviewTextInput="TypeNumericValidation"
+            Style="{StaticResource Estilo_Placeholder}"
+            Tag="R$" />
 
         <TextBlock
             Grid.Row="1"
@@ -95,23 +95,24 @@
             Foreground="White"
             Text="Imposto:" />
         <TextBox
-                x:Name="ImpostoBox"
+            x:Name="ImpostoBox"
             Grid.Row="1"
-                Grid.Column="3"
-                Width="140"
-                Height="40"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="#22202f"
-                FontSize="18"
-                Foreground="White"
-                Style="{StaticResource Estilo_Placeholder}"
-                Tag="R$" />
+            Grid.Column="3"
+            Width="140"
+            Height="40"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="#22202f"
+            FontSize="18"
+            Foreground="White"
+            PreviewTextInput="TypeNumericValidation"
+            Style="{StaticResource Estilo_Placeholder}"
+            Tag="R$" />
 
         <Button
             Grid.Row="3"
-            Grid.ColumnSpan="2"
             Grid.Column="2"
+            Grid.ColumnSpan="2"
             Width="150"
             Height="50"
             Margin="0,0,20,0"

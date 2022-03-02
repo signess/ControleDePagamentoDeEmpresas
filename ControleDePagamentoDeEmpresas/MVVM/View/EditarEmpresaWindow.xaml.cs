@@ -1,7 +1,10 @@
-﻿using ControleDePagamentoDeEmpresas.MVVM.Model;
+﻿using ControleDePagamentoDeEmpresas.Core;
+using ControleDePagamentoDeEmpresas.MVVM.Model;
 using ControleDePagamentoDeEmpresas.Services;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Input;
 
 namespace ControleDePagamentoDeEmpresas.MVVM.View
 {
@@ -47,9 +50,22 @@ namespace ControleDePagamentoDeEmpresas.MVVM.View
 
         private void FinalizarBtn(object sender, RoutedEventArgs e)
         {
-            EmpresaModel novaEmpresa = new EmpresaModel { Id = _empresa.Id, Nome = EmpresaBox.Text, DataCompra = DataCompraBox.Text, ValorCompra = Convert.ToDecimal(ValorCompraBox.Text), Imposto = Convert.ToDecimal(ImpostoBox.Text), Loja = _empresa.Loja, Prioridade = _empresa.Prioridade };
+            if (string.IsNullOrEmpty(ValorCompraBox.Text))
+                ValorCompraBox.Text = "0";
+            if (string.IsNullOrEmpty(ImpostoBox.Text))
+                ImpostoBox.Text = "0";
+            string valorCompraText = ValorCompraBox.Text.Replace('.', ',');
+            string impostoText = ImpostoBox.Text.Replace('.', ',');
+            EmpresaModel novaEmpresa = new EmpresaModel { Id = _empresa.Id, Nome = EmpresaBox.Text, DataCompra = DataCompraBox.Text, ValorCompra = Convert.ToDecimal(valorCompraText), Imposto = Convert.ToDecimal(impostoText), Loja = _empresa.Loja, Prioridade = _empresa.Prioridade };
             SqliteDataAccess.UpdateEmpresa(novaEmpresa, _index, _loja);
             this.Close();
         }
+
+        private void TypeNumericValidation(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9,.]+").IsMatch(e.Text);
+        }
+
+
     }
 }

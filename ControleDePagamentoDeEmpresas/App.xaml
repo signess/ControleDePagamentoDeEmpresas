@@ -1,9 +1,10 @@
-﻿<Application x:Class="ControleDePagamentoDeEmpresas.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:view="clr-namespace:ControleDePagamentoDeEmpresas.MVVM.View"
-             xmlns:viewModel="clr-namespace:ControleDePagamentoDeEmpresas.MVVM.ViewModel"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="ControleDePagamentoDeEmpresas.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:ControleDePagamentoDeEmpresas.MVVM.View"
+    xmlns:viewModel="clr-namespace:ControleDePagamentoDeEmpresas.MVVM.ViewModel"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
